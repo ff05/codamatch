@@ -29,3 +29,13 @@ module Codamatch
     config.generators.system_tests = nil
   end
 end
+
+
+module Codamatch
+  class Application < Rails::Application
+    # add the next 3 lines
+    console do
+      ActiveRecord::Base.connection
+    end
+  end
+end
