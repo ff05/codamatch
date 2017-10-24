@@ -5,4 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :matches
+
+  scope :students, -> { where(admin: false) }
+
+  scope :available_students, ->(user) { students.where.not(id: user) }
+
+  
+
 end
