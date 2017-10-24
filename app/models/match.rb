@@ -19,12 +19,21 @@ class Match < ApplicationRecord
   #
   # end
 
-  def self.print_students
-    # get_students.each do |u|
-    #   puts "#{u.name} pairs with #{User.available_students(u).sample.name}"
-    # end
-    u = User.third
-    puts "#{u.name} pairs with #{User.available_students(u).sample.name}"
+  def self.make_pairs
+    get_students.each do |user|
+      av = available_students(user)
+      partner = pick_student(av, user)
+      match = new(date: Time.now.to_date, student1: user, student2: partner)
+      match.save
+    end
+  end
+
+  def available_students(student)
+    User.available_students(student)
+  end
+
+  def pick_student(students, student)
+    students.delete(student)
   end
 
   scope :get_students, -> { User.students }
