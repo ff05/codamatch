@@ -10,13 +10,15 @@ class User < ApplicationRecord
 
   scope :get_students, ->(user) { students.where.not(id: user) }
 
+  scope :get_user_by_id, ->(user_id) { Match.get_students.find_by id: user_id }
+
   def get_other_students(user, students)
     @other_students = get_students - user.previous_matches
 
   end
 
-  def save_previous_matches(match) # Match is a student id
-    previous_matches << match
+  def save_history(student_id)
+    history << student_id
     save
   end
 
