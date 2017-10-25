@@ -8,8 +8,16 @@ class User < ApplicationRecord
 
   scope :students, -> { where(admin: false) }
 
-  scope :available_students, ->(user) { students.where.not(id: user) }
+  scope :get_students, ->(user) { students.where.not(id: user) }
 
-  
+  def get_other_students(user, students)
+    @other_students = get_students - user.previous_matches
+
+  end
+
+  def save_previous_matches(match) # Match is a student id
+    previous_matches << match
+    save
+  end
 
 end

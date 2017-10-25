@@ -7,34 +7,33 @@ class Match < ApplicationRecord
   validates :student1, presence: true
   validates :student2, presence: true
 
-  # def self.cycle_matches
-  #   DAYS.each do |day|
-  #     get_students.each do |student|
-  #       User.available_students(student)
-  #       student1 = student.id
-  #       student2 = User.get_random_student_id
-  #       match = new(date: day, student1: student1, student2: student2)
-  #     end
+  # def self.make_pairs
+  #   get_students.each do |user|
+  #     user.available_students(user)
+  #     other = other_all.sample
+  #     match = create!(date: Date.new(2017, 10, 30), student1: user.id, student2: other.id)
+  #     user.save_previous_matches(other.id)
   #   end
-  #
   # end
-
   def self.make_pairs
-    get_students.each do |user|
-      av = available_students(user)
-      partner = pick_student(av, user)
-      match = new(date: Time.now.to_date, student1: user, student2: partner)
-      match.save
+    (1..10).each do |day|
+      users_ids = Match.get_ids(Match.get_students)
+      users_ids.each do |user_id|
+        user1 = Match.get_user_by_id(user_id)
+        user2 = Match.get_other_students(user_id).sample
+        user2_id = user2.id
+        puts user2_id
+        # user_ids(delete)
+        # Match.create!(Date.new(2017, 10, 30), User.user_id, student2)
+      end
     end
   end
 
-  def available_students(student)
-    User.available_students(student)
-  end
+  scope :get_students, -> { User.students.where(admin: false) }
 
-  def pick_student(students, student)
-    students.delete(student)
-  end
+  scope :get_other_students, ->(user) { get_students.where.not(id: user) }
 
-  scope :get_students, -> { User.students }
+  scope :get_ids, ->(users) { users.ids }
+
+  scope :get_user_by_id, ->(user_id) { get_students.where(id: user_id) }
 end
