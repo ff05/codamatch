@@ -1,8 +1,28 @@
-<div class="container text-center">
-  <h1>Your match of the day is:</h1>
-  <h2>Name</h2>
+<div class="container text-center" id="welcome">
+  <h1>Welcome, <%= current_user.name %></h1>
+  <h2><br>Your match of the day is</h2s>
+  <h2><br>.....</h2>
 </div>
 
-<div="container">
+<hr>
+
+<div class="container text-center">
   <h2>History of matches</h2>
+
+
+  <table class="table table-striped text-center">
+    <thead class="thead-inverse">
+    <tr>
+      <th  class="text-center">Student</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+    <td><%= user.name %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  </table>
+
 </div>
