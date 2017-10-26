@@ -1,5 +1,5 @@
 class Match < ApplicationRecord
-  DAYS = (Date.new(2017, 10, 30)..Date.new(2017, 12, 14))
+  DATES = (Date.new(2017, 10, 30)..Date.new(2017, 12, 14))
 
   belongs_to :user
 
@@ -7,26 +7,25 @@ class Match < ApplicationRecord
   validates :student1, presence: true
   validates :student2, presence: true
 
-  # def self.make_pairs
-  #   get_students.each do |user|
-  #     user.available_students(user)
-  #     other = other_all.sample
-  #     match = create!(date: Date.new(2017, 10, 30), student1: user.id, student2: other.id)
-  #     user.save_previous_matches(other.id)
-  #   end
-  # end
   def self.make_pairs
-    (1..10).each do |day|
-      users_ids = Match.get_ids(Match.get_students)
-      users_ids.each do |user_id|
-        user1 = Match.get_user_by_id(user_id)
-        user2 = Match.get_other_students(user_id).sample
-        user2_id = user2.id
-        puts user2_id
-        # user_ids(delete)
-        # Match.create!(Date.new(2017, 10, 30), User.user_id, student2)
+    @students = get_students.to_a
+    DATES.each do |d|
+      @game_count = @students.count / 2
+      set_dummy
+      for i in 1..@game_count
+        Match.create!(date: d, student1: @students[i-1].id, student2: @students[@students.count-i].id, user: @students[i-1])
       end
+
+      @students.insert(1, @students.pop)
     end
+  end
+
+  def self.set_dummy
+    get_students.ids << 'DUMMY' if is_odd?
+  end
+
+  def self.is_odd?
+    get_students.size
   end
 
   scope :get_students, -> { User.students.where(admin: false) }
@@ -36,4 +35,5 @@ class Match < ApplicationRecord
   scope :get_ids, ->(users) { users.ids }
 
   scope :get_user_by_id, ->(user_id) { get_students.where(id: user_id) }
+
 end
