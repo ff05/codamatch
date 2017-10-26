@@ -36,4 +36,5 @@ class Match < ApplicationRecord
 
   scope :get_user_by_id, ->(user_id) { get_students.where(id: user_id) }
 
+  scope :get_matches_by_student, ->(user_id) { Match.where(student1: user_id) }
 end
