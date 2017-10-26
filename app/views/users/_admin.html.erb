@@ -22,7 +22,7 @@
     <td><%= user.name %></td>
     <td><%= user.email %></td>
     <% if user.is_admin? %>
-    <td><%= link_to "Demote Admin", @user, method: :patch, class: "btn btn-primary", id: "btn-d" %></td>
+      <td><a href="#" class="btn btn-primary" id="btn-p">demote</a></td>
     <% else %>
     <td><a href="#" class="btn btn-success" id="btn-p">Promote</a></td>
     <% end %>
