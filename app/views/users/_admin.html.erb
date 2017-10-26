@@ -1,25 +1,38 @@
-<h1>List of matches of the day</h1>
+<h1 class="text-center" id="listMatches">List of matches of the day</h1>
+
+<%= render 'users/admin_matches' %>
 
 <hr>
 
-<h2 class="text-center">List of all users</h2>
-
+<div class="container">
+<h2 id="listUsers" class="text-center">List of all Users</h2>
 
 <table class="table table-striped text-center">
   <thead class="thead-inverse">
   <tr>
     <th  class="text-center">User</th>
     <th class="text-center">Email</th>
-    <th class="text-center">Admin</th>
+    <th class="text-center">Promote/demote</th>
+    <th class="text-center">Status</th>
   </tr>
 </thead>
 <tbody>
   <% @users.each do |user| %>
-  <tr>
-  <td><%= user.name %></td>
-  <td><%= user.email %></td>
-  <td><%= user.admin %></td>
+  <tr class="user" data-id="<%= user.id %>">
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <% if user.is_admin? %>
+    <td><%= link_to "Demote Admin", @user, method: :patch, class: "btn btn-primary", id: "btn-d" %></td>
+    <% else %>
+    <td><a href="#" class="btn btn-success" id="btn-p">Promote</a></td>
+    <% end %>
+    <% if user.is_admin? %>
+    <td> Admin </td>
+    <% else %>
+    <td> Student </td>
+    <% end %>
   </tr>
   <% end %>
 </tbody>
 </table>
+</div>

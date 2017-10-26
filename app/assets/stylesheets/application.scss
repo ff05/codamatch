@@ -26,10 +26,15 @@ body {
   padding-top: 40px;
 }
 
-hr {
-  background-color: #283747;
+#listUsers {
+  padding-bottom: 30px;
+  padding-top:20px;
 }
 
+#listMatches {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.

@@ -23,7 +23,9 @@ gem 'jquery-rails', '~> 4.3.1'
 # Use Devise for authentication
 gem 'devise', '~> 4.2'
 
-  gem 'faker', '1.6.6'
+gem 'faker', '1.6.6'
+
+gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,3 +53,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'active_model_serializers', '~> 0.10.0'
