@@ -30,6 +30,16 @@ class Match < ApplicationRecord
     get_students.size
   end
 
+  def self.get_other(match, user_id)
+    s1 = match.student1
+    s2 = match.student2
+    if user_id != s2
+      User.get_names(s1).join('')
+    else
+      User.get_names(s2).join('')
+    end
+  end
+
   scope :get_students, -> { User.students.where(admin: false) }
 
   scope :get_other_students, ->(user) { get_students.where.not(id: user) }

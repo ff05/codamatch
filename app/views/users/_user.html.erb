@@ -15,7 +15,7 @@
     <% @previous_matches.each do |match| %>
       <tr id="match">
         <td ><%= match.date %></td>
-        <td ><%= User.get_names(match.student2).join('') %></td>
+        <td ><%= Match.get_other(match, match.student1) %></td>
       </tr>
     <% end %>
   </table>
