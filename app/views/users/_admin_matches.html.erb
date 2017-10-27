@@ -1,23 +1,31 @@
-<h1 class="h1">The matches for today are:</h1>
-<table class="table">
-  <tr id="matches">
-    <th class="text-center">Student1</th>
-    <th class="text-center">Student2</th>
-  </tr>
-  <% @matches_today.each do |match| %>
+<div class="container">
+<h1 class="h1">The matches for today are</h1>
+  <table class="table table-striped text-center">
+    <thead class="thead-inverse">
+    <tr id="matches">
+      <th class="text-center">Student 1</th>
+      <th class="text-center">Student 2</th>
+    </tr>
+  </thead>
+    <% @matches_today.each do |match| %>
     <tr id="match">
       <td><%= User.get_name(match.student1).join('') %></td>
       <td><%= User.get_name(match.student2).join('')  %></td>
     </tr>
-  <% end %>
-</table>
-
-<h2 class="h2">All days:</h2>
-<% Match::DATES.each do |d| %>
-  <div class="col-sm-4">
-    <h3 class="h3"><%= d %></h3>
-    <% Match.get_matches_by_date(d).each do |match| %>
-        <p><span><%= User.get_name(match.student1).join('') %></span> - <span><%= User.get_name(match.student2).join('')  %></span></p>
     <% end %>
-  </div>
-<% end %>
+  </table>
+</div>
+
+<hr>
+
+<div class="container">
+  <h2 class="h2">All days</h2>
+    <% Match::DATES.each do |d| %>
+      <div class="col-sm-4">
+        <h3 class="h3"><%= d %></h3>
+          <% Match.get_matches_by_date(d).each do |match| %>
+          <p id="pairNames"><span><%= User.get_name(match.student1).join('') %></span>  -  <span><%= User.get_name(match.student2).join('')  %></span></p>
+          <% end %>
+      </div>
+    <% end %>
+</div>
