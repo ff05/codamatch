@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user!
 
   def home
     @date_today = Match::FIRST_DATE + 2.days
@@ -16,7 +17,10 @@ class PagesController < ApplicationController
     @user_name = User.get_name(current_user.id) unless !current_user
 
     @matches_today = Match.get_matches_by_date(@date_today)
-    @matches_per_date = Match.matches_per_date
+  end
+
+  def matches
+    @matches = Match.all
   end
 
 end
