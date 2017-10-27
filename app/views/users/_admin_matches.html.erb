@@ -1,15 +1,23 @@
-<h1>All Matches</h1>
+<h1 class="h1">The matches for today are:</h1>
 <table class="table">
   <tr id="matches">
-    <th>Date</th>
-    <th>Student1</th>
-    <th>Student2</th>
+    <th class="text-center">Student1</th>
+    <th class="text-center">Student2</th>
   </tr>
-  <% @matches.each do |match| %>
+  <% @matches_today.each do |match| %>
     <tr id="match">
-      <td><%= match.date %></td>
       <td><%= match.student1 %></td>
       <td><%= match.student2 %></td>
     </tr>
   <% end %>
 </table>
+
+<h2 class="h2">All days:</h2>
+<% Match::DATES.each do |d| %>
+  <div class="col-sm-4">
+    <h3 class="h3"><%= d %></h3>
+    <% Match.get_matches_by_date(d).each do |match| %>
+        <p><span><%= match.student1 %></span> - <span><%= match.student2 %></span></p>
+    <% end %>
+  </div>
+<% end %>

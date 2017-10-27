@@ -1,32 +1,22 @@
 <div class="container text-center" id="welcome">
   <h1>Welcome, <%= current_user.name %></h1>
-  <h2><br>Your matches are</h2s>
-  <ul>
-    <% @user_matches.each do |match| %>
-    <li><%= match.student2 %></li>
-    <% end %>
-  </ul>
+  <h2><br>Today is <%= @date_today %> and your match is <br> <%= @other_name %></h2>
 </div>
 
 <hr>
 
 <div class="container text-center">
-  <h2>History of matches</h2>
-
-
-  <table class="table table-striped text-center">
-    <thead class="thead-inverse">
-      <tr>
-        <th  class="text-center">Student</th>
-      </tr>
-    </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-    <td><%= user.name %></td>
+  <h2 data-toggle="collapse" >History of matches</h2>
+  <table class="table table-striped">
+    <tr id="matches">
+      <th class="text-center">Date</th>
+      <th class="text-center">Match</th>
     </tr>
+    <% @previous_matches.each do |match| %>
+      <tr id="match">
+        <td ><%= match.date %></td>
+        <td ><%= User.get_names(match.student2) %></td>
+      </tr>
     <% end %>
-  </tbody>
   </table>
-
 </div>

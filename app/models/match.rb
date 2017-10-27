@@ -1,5 +1,7 @@
 class Match < ApplicationRecord
-  DATES = (Date.new(2017, 10, 30)..Date.new(2017, 12, 14))
+  FIRST_DATE = Date.today
+  LAST_DATE = Date.today + 6.days
+  DATES = (FIRST_DATE..LAST_DATE)
 
   belongs_to :user
 
@@ -28,6 +30,14 @@ class Match < ApplicationRecord
     get_students.size
   end
 
+  def self.matches_per_date
+    DATES.each do |d|
+      Match.where(date: d).each do |match|
+        match
+      end
+    end
+  end
+
   scope :get_students, -> { User.students.where(admin: false) }
 
   scope :get_other_students, ->(user) { get_students.where.not(id: user) }
@@ -36,5 +46,15 @@ class Match < ApplicationRecord
 
   scope :get_user_by_id, ->(user_id) { get_students.where(id: user_id) }
 
-  scope :get_matches_by_student, ->(user_id) { Match.where(student1: user_id) }
+  scope :get_matches, -> { Match.all }
+
+  scope :get_matches_by_date, ->(date) { Match.where(date: date) }
+
+  scope :get_previous_matches, ->(date) { Match.where("date < ?", date) }
+
+  scope :get_dates, -> { Match.dates }
+
+  scope :matches_per_user, ->(user) { Match.where("student1 = ? OR student2 = ?", user.to_s, user.to_s) }
+
+  scope :match_today, ->(date) { Match.where(date: date) }
 end

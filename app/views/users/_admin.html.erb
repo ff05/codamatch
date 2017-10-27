@@ -1,38 +1,37 @@
-<h1 class="text-center" id="listMatches">List of matches of the day</h1>
-
+<div class="container text-center">
 <%= render 'users/admin_matches' %>
-
+</div>
 <hr>
-
 <div class="container">
-<h2 id="listUsers" class="text-center">List of all Users</h2>
+  <h2 id="listUsers" class="text-center">List of all Users</h2>
 
-<table class="table table-striped text-center">
-  <thead class="thead-inverse">
-  <tr>
-    <th  class="text-center">User</th>
-    <th class="text-center">Email</th>
-    <th class="text-center">Promote/demote</th>
-    <th class="text-center">Status</th>
-  </tr>
-</thead>
-<tbody>
-  <% @users.each do |user| %>
-  <tr class="user" data-id="<%= user.id %>">
-    <td><%= user.name %></td>
-    <td><%= user.email %></td>
-    <% if user.is_admin? %>
-      <td><a href="#" class="btn btn-primary" id="btn-p">demote</a></td>
-    <% else %>
-    <td><a href="#" class="btn btn-success" id="btn-p">Promote</a></td>
+  <table class="table table-striped text-center">
+    <thead class="thead-inverse">
+    <tr>
+      <th class="text-center">User</th>
+      <th class="text-center">Email</th>
+      <th class="text-center">Promote/demote</th>
+      <th class="text-center">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr class="user" data-id="<%= user.id %>">
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <% if user.is_admin? %>
+        <td><a href="#" class="btn btn-primary" id="btn-p">demote</a></td>
+      <% else %>
+      <td><a href="#" class="btn btn-success" id="btn-p">Promote</a></td>
+      <% end %>
+      <% if user.is_admin? %>
+      <td> Admin </td>
+      <% else %>
+      <td> Student </td>
+      <% end %>
+    </tr>
     <% end %>
-    <% if user.is_admin? %>
-    <td> Admin </td>
-    <% else %>
-    <td> Student </td>
-    <% end %>
-  </tr>
-  <% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+  </div>
 </div>
