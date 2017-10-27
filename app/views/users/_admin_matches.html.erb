@@ -6,8 +6,8 @@
   </tr>
   <% @matches_today.each do |match| %>
     <tr id="match">
-      <td><%= match.student1 %></td>
-      <td><%= match.student2 %></td>
+      <td><%= User.get_name(match.student1).join('') %></td>
+      <td><%= User.get_name(match.student2).join('')  %></td>
     </tr>
   <% end %>
 </table>
@@ -17,7 +17,7 @@
   <div class="col-sm-4">
     <h3 class="h3"><%= d %></h3>
     <% Match.get_matches_by_date(d).each do |match| %>
-        <p><span><%= match.student1 %></span> - <span><%= match.student2 %></span></p>
+        <p><span><%= User.get_name(match.student1).join('') %></span> - <span><%= User.get_name(match.student2).join('')  %></span></p>
     <% end %>
   </div>
 <% end %>

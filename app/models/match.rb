@@ -30,14 +30,6 @@ class Match < ApplicationRecord
     get_students.size
   end
 
-  def self.matches_per_date
-    DATES.each do |d|
-      Match.where(date: d).each do |match|
-        match
-      end
-    end
-  end
-
   scope :get_students, -> { User.students.where(admin: false) }
 
   scope :get_other_students, ->(user) { get_students.where.not(id: user) }

@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   scope :get_names, ->(user_id) { students.where(id: user_id).pluck :name }
 
-  scope :get_name, ->(user) { User.where(id: user).name }
+  scope :get_name, ->(user) { User.where(id: user).pluck :name }
 
   def get_other_students(user, students)
     @other_students = get_students - user.previous_matches
