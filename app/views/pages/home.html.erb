@@ -1,8 +1,9 @@
 <div class="text-center" id="banner">
 <h1>CodaMatch</h1>
-</div>
 <% if !current_user %>
   <%= link_to "Register", new_user_registration_path, class: "btn btn-lg btn-success" %>
+</div>
+
 <% elsif current_user.try(:admin?) %>
   <%= render 'users/admin' %>
 <% else %>

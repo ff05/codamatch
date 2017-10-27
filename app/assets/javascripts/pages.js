@@ -15,7 +15,7 @@ function promote_user(event) {
     dataType: "json"
   })
   .done(function(data) {
-    $(button).removeClass('btn-success btn-p').addClass('btn-primary btn-d').html('Demote');
+    $(button).removeClass('btn-success btn-p').addClass('btn-primary btn-d').html('Demote').click(demote_user);
     $(button).parent().next().html('admin');
   });
 }
@@ -37,7 +37,7 @@ function demote_user(event) {
     dataType: "json"
   })
   .done(function(data) {
-    $(button).removeClass('btn-primary btn-d').addClass('btn-success btn-p').html('Promote');
+    $(button).removeClass('btn-primary btn-d').addClass('btn-success btn-p').html('Promote').click(promote_user);
     $(button).parent().next().html('student');
   });
 }
