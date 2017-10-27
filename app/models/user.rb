@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   scope :get_students, ->(user) { students.where.not(id: user) }
 
+  scope :get_names, ->(user_id) { students.where(id: user_id).pluck :name }
+
+  scope :get_name, ->(user) { User.where(id: user).name }
+
   def get_other_students(user, students)
     @other_students = get_students - user.previous_matches
 
@@ -19,7 +23,6 @@ class User < ApplicationRecord
     previous_matches << match
     save
   end
-
 
   def is_admin?
     self.admin
