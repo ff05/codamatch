@@ -1,6 +1,6 @@
 <div class="container text-center" id="welcome">
   <h1>Welcome, <%= current_user.name %></h1>
-  <h2><br>Your match of today is <br> <%= @other_name %></h2>
+  <h2><br>Your match of today is <br> <%= @get_other %></h2>
 </div>
 
 <hr>
@@ -15,7 +15,7 @@
     <% @previous_matches.each do |match| %>
       <tr id="match">
         <td ><%= match.date %></td>
-        <td ><%= User.get_names(match.student2) %></td>
+        <td ><%= User.get_names(match.student2).join('') %></td>
       </tr>
     <% end %>
   </table>
