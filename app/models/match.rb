@@ -1,6 +1,6 @@
 class Match < ApplicationRecord
-  FIRST_DATE = Date.today
-  LAST_DATE = Date.today + 6.days
+  FIRST_DATE = Date.today - 3.days
+  LAST_DATE = Date.today + 2.days
   DATES = (FIRST_DATE..LAST_DATE)
 
   belongs_to :user
